@@ -22,7 +22,38 @@ class _C {
   static const chipSelTxt = Color(0xFF2C2814);
   static const green    = Color(0xFF6B7C4E);
 }
+class FiltreResultat {
+  final Set<String> categories;
+  final double distance;
+  final RangeValues prix;
+  final RangeValues creneau;
+  final Set<String> dispos;
+  final double? noteMin;
+  final Set<String> services;
+  final Set<String> paiements;
+  final Set<String> alimentaires;
 
+  const FiltreResultat({
+    required this.categories,
+    required this.distance,
+    required this.prix,
+    required this.creneau,
+    required this.dispos,
+    this.noteMin,
+    required this.services,
+    required this.paiements,
+    required this.alimentaires,
+  });
+
+  // Nombre de filtres actifs pour le badge
+  int get nbActifs =>
+    categories.length + dispos.length + services.length +
+    paiements.length + alimentaires.length +
+    (noteMin != null ? 1 : 0) +
+    (distance < 10 ? 1 : 0) +
+    (prix != const RangeValues(100, 1000) ? 1 : 0) +
+    (creneau != const RangeValues(6, 23) ? 1 : 0);
+}
 // ─────────────────────────────────────────────
 // FILTRE SCREEN
 // ─────────────────────────────────────────────
@@ -498,7 +529,17 @@ class _FiltreScreenState extends State<FiltreScreen> {
                 color: _C.divider.withOpacity(0.4))),
       ),
       child: GestureDetector(
-        onTap: () => Navigator.pop(context),
+        onTap: () => Navigator.pop(context, FiltreResultat(
+       categories: _catsSelectionnees,
+       distance: _distance,
+       prix: _prix,
+       creneau: _creneau,
+       dispos: _disposSelectionnees,
+       noteMin: _noteMin,
+       services: _services,
+       paiements: _paiements,
+       alimentaires: _alimentairesSelectionnees,
+)),
         child: Container(
           height: 54,
           decoration: BoxDecoration(

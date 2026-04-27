@@ -1,11 +1,10 @@
-// ignore_for_file: sized_box_for_whitespace, no_leading_underscores_for_local_identifiers, unused_element, avoid_unnecessary_containers, unused_label, dead_code, unnecessary_underscores
+// ignore_for_file: deprecated_member_use, sized_box_for_whitespace, no_leading_underscores_for_local_identifiers, unused_element, avoid_unnecessary_containers, unused_label, dead_code, unnecessary_underscores
 
 
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:laaisraf/offre_detail_screen.dart';
-
+import 'package:peeco/offre_detail_screen.dart';
 
 
 
@@ -83,16 +82,16 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
       distance: 0.4,
       offersCount: 3,
       rating: 4.6,
-      imageAsset: 'lib/images/moulin_dore.png',   // ← remplacer par votre asset
+      imageAsset: 'assets/images/moulin_dore.png',   // ← remplacer par votre asset
     ),
     NearbyStore(
-      name: "L'ASSIETTE DES ANGLES",
+      name: "Burger House",
       category: 'Restaurant',
-      address: 'Jolie vue, Kouba',
-      distance: 1.3,
+      address: 'Vieux Kouba, Kouba, Alger',
+      distance: 1.5,
       offersCount: 4,
       rating: 3.9,
-      imageAsset: 'lib/images/assiette_angles.png',
+      imageAsset: 'assets/images/burger_house2.png',
     ),
     NearbyStore(
       name: 'LE PANIER FRAIS',
@@ -101,7 +100,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
       distance: 0.9,
       offersCount: 2,
       rating: 4.6,
-      imageAsset: 'lib/images/panier_frais.png',
+      imageAsset: 'assets/images/panier_frais.png',
     ),
   ];
 
@@ -182,8 +181,8 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
       border: Border.all(color: AppColors.offerCardBg, width: 2),
     ),
     padding: EdgeInsets.only(
-      top: MediaQuery.of(context).padding.top + 30,
-      bottom: 50,
+      top: MediaQuery.of(context).padding.top + 20,
+      bottom: 30,
       left: 20,
       right: 20,
     ),
@@ -193,9 +192,14 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
         // ── Ligne 1 : Logo + Localisation + Icône Search ──
         Row(
           children: [
+          GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back_ios_new,
+                    size: 18, color: AppColors.textDark),
+              ),
             // Logo
             Image.asset(
-              'lib/images/laaisraf_logo.png',
+              'assets/images/laaisraf_logo.png',
               height: 60,
               errorBuilder: (_, __, ___) => Container(
                 width: 30, height: 30,
@@ -234,7 +238,8 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
             ),
 
             const Spacer(),
-
+          
+         
             // ── Icône Search (remplace la barre sur cette ligne) ──
             
           ],
@@ -243,8 +248,9 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
         const SizedBox(height: 20), // ← espace entre les 2 lignes
 
         // ── Ligne 2 : Barre de recherche complète ──
+
         Container(
-          height: 30,
+          height: 45,
           decoration: BoxDecoration(
             color: const Color(0xFFCCD1AE),
             borderRadius: BorderRadius.circular(20),
@@ -252,7 +258,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
           ),
           child: const Row(
             children: [
-              SizedBox(width: 20),
+              SizedBox(width: 30),
               Icon(Icons.search, color: AppColors.chipDark, size: 20),
               SizedBox(width: 10),
               Text(
@@ -342,7 +348,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
     restants: 5,
     creneau: '07:00 – 10:00',
     categorie: 'Boulangerie',
-    imageAsset: 'lib/images/offre_maison_pain.png',
+    imageAsset: 'assets/images/offre_maison_pain.png',
     description:
         'Profitez d\'une corbeille généreuse préparée chaque matin avec nos '
         'pains et viennoiseries du jour. Une belle façon de commencer la '
@@ -356,8 +362,8 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
   ),
   OffreDetail(
     id: 'o2',
-    nom: 'Menu Café du Coin',
-    commercant: 'Le Café du Coin',
+    nom: 'Double Cheese Burger Menu',
+    commercant: 'BURGER HOUSE',
     adresse: 'Jolie vue, Kouba',
     prix: '780 DA',
     prixOriginal: '1100 DA',
@@ -366,7 +372,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
     restants: 2,
     creneau: '12:00 – 15:00',
     categorie: 'Restaurant',
-    imageAsset: 'lib/images/offre_burger.png',
+    imageAsset: 'assets/images/offre_burger.png',
     description:
         'Notre burger maison préparé avec des ingrédients frais du marché local, '
         'accompagné de frites croustillantes et d\'une boisson au choix. '
@@ -412,8 +418,8 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
       ),
       child: _activeOfferContent(
         imagePath: offre.imageAsset ?? '',
-        title: offre.commercant,
-        subtitle: offre.categorie.toUpperCase(),
+        title: '',
+        subtitle: '',
       ),
     ),
   );
@@ -506,7 +512,7 @@ Widget _minimapSection() {
                         color: Colors.white, width: 2),
                   ),
                   child: const Icon(
-                      Icons.restaurant_outlined,
+                     Icons.restaurant_outlined,
                       color: Colors.white, size: 13),
                 ),
               ),
@@ -514,7 +520,7 @@ Widget _minimapSection() {
               Positioned(
                 top: 60, left: 140,
                 child: Container(
-                  width: 28, height: 28,
+                  width: 30, height: 30,
                   decoration: BoxDecoration(
                     color: const Color(0xFF5A9E8B),
                     shape: BoxShape.circle,
@@ -523,7 +529,7 @@ Widget _minimapSection() {
                   ),
                   child: const Icon(
                       Icons.shopping_basket_outlined,
-                      color: Colors.white, size: 13),
+                      color: Color.fromARGB(31, 22, 21, 21), size: 13),
                 ),
               ),
               // Point utilisateur (bleu)
@@ -642,15 +648,20 @@ Widget _minimapSection() {
 
         // ── Bouton flèche ──────────────────────────────────────────
         Positioned(
-        top: 20, right: 10,
-        child: Container(
-          width: 8, height: 8,
-          decoration: const BoxDecoration(
-            color: AppColors.accent,
-            shape: BoxShape.circle,
-          ),
-        ),
-      ),
+  top: 155, right: 10,
+  child: Container(
+    width: 40, height: 40,
+    decoration: const BoxDecoration(
+      color: AppColors.accent,
+      shape: BoxShape.circle,
+    ),
+    child: const Icon(
+      Icons.arrow_outward,
+      color: Colors.white,
+      size: 20,
+    ),
+  ),
+),
     ],
   );
   }
@@ -842,7 +853,7 @@ Widget _minimapSection() {
     return Container(
       color: AppColors.storeIconBg,
       child: const Center(
-        child: Icon(Icons.storefront_outlined, color: Color(0xFF7A6A50), size: 28),
+       child: Icon(Icons.storefront_outlined, color: Color(0xFF7A6A50), size: 28),
       ),
     );
   }
@@ -854,22 +865,22 @@ Widget _minimapSection() {
   return GestureDetector(                                     // ← AJOUTER
     onTap: () => Navigator.pushNamed(context, '/cart'),       // ← AJOUTER
     child: Container(
-      width: 50, height: 50,
+      width: 45, height: 45,
       decoration: BoxDecoration(
-        color: AppColors.accent,
+        color:  const Color(0xFFE8A45A),
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: AppColors.accent.withOpacity(0.4),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: const Color.fromARGB(255, 3, 3, 3),
+            blurRadius: 15,
+            offset: const Offset(0,5),
           ),
         ],
       ),
       child: const Icon(
         Icons.shopping_cart_outlined,
-        color: AppColors.white,
-        size: 22,
+        color: AppColors.textDark,
+        size: 40 ,
       ),
     ),
   );                                                          // ← AJOUTER
@@ -884,7 +895,9 @@ Widget _minimapSection() {
     Icons.home_outlined,
     Icons.shopping_bag_outlined,   // ← index 3 : réservations
     Icons.person_outline,
-    Icons.filter_rounded,
+    Icons.tune_rounded
+   // Icons.filter_1_rounded,
+    
   ];
   return Container(
     margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
@@ -916,6 +929,10 @@ Widget _minimapSection() {
               // 🔍 → Carte / Recherche
               Navigator.pushNamed(context, '/carte');
             }
+            if (i == 2) {
+              // 🔍 → Carte / Recherche
+              Navigator.pushNamed(context, '/home_client');
+            }
             if (i == 3) {
               // 🛍️ → Réservations
               Navigator.pushNamed(context, '/reservations');
@@ -927,6 +944,9 @@ Widget _minimapSection() {
             if (i == 5) {
               // ⚙️ → Filtre client (profil à venir)
               Navigator.pushNamed(context, '/filtre_screen');
+            }
+            if(i == 6) {
+            Navigator.pushNamed(context, '/offre_detail');
             }
           },
           child: AnimatedContainer(

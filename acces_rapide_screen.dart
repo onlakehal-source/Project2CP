@@ -3,10 +3,11 @@
 //  - Liste avec mode édition
 //  - Ajouter / Modifier / Supprimer
 // ─────────────────────────────────────────────
-// ignore_for_file: recursive_getters, non_constant_identifier_names, unused_element, no_leading_underscores_for_local_identifiers, prefer_final_fields, unused_field, deprecated_member_use
+// ignore_for_file: unnecessary_underscores, recursive_getters, non_constant_identifier_names, unused_element, no_leading_underscores_for_local_identifiers, prefer_final_fields, unused_field, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:laaisraf/home_client_screen.dart';
+import 'package:peeco/home_client_screen.dart';
+
 
 // ─────────────────────────────────────────────
 // COULEURS
@@ -41,11 +42,11 @@ extension TypeAdresseExt on TypeAdresse {
 
 String get ImagePath {
     switch (this) {
-      case TypeAdresse.maison:     return 'lib/images/home.png';
-      case TypeAdresse.universite: return 'lib/images/univ.png';
-      case TypeAdresse.famille:    return 'lib/images/famille.png';
-      case TypeAdresse.travail:    return 'lib/images/travail.png';
-      case TypeAdresse.autre:      return 'lib/images/autre.png';
+      case TypeAdresse.maison:     return 'assets/images/home.png';
+      case TypeAdresse.universite: return 'assets/images/univ.png';
+      case TypeAdresse.famille:    return 'assets/images/famille.png';
+      case TypeAdresse.travail:    return 'assets/images/travail.png';
+      case TypeAdresse.autre:      return 'assets/images/autre.png';
       
     }
   }
@@ -176,8 +177,13 @@ class _AccesRapideScreenState extends State<AccesRapideScreen> {
         // ── Ligne 1 : Logo + Localisation ──
         Row(
           children: [
+           GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back_ios_new,
+                    size: 18, color: AppColors.textDark),
+              ),
             Image.asset(
-              'lib/images/laaisraf_logo.png',
+              'assets/images/laaisraf_logo.png',
               height: 50,
               errorBuilder: (_, __, ___) => Container(
                 width: 45, height: 50,
@@ -627,15 +633,15 @@ class _FormulaireAdresseState
                 child: Container(
                   width: 64, height: 64,
                   decoration: BoxDecoration(
-                    color: _C.accentBg,
+                    color: _estModif ? _C.accent : const Color.fromARGB(255, 236, 168, 49),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     _estModif
                         ? Icons.edit_outlined
-                        : Icons.add_location_alt_outlined,
+                        : Icons.add_circle_outline,
                     size: 30,
-                    color: _C.accent,
+                    color: _estModif ? Colors.white : _C.textDark,
                   ),
                 ),
               ),
@@ -783,7 +789,7 @@ class _FormulaireAdresseState
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: Colors.white)),
+                            color: Colors.black)),
                   ),
                 ),
               ),
